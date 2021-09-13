@@ -113,12 +113,15 @@ const checkButtonHandler = (e) => {
     month: Number(bdValue[1]),
     year: Number(bdValue[0]),
   };
-
-  if (checkPalindromeAll(date)) {
-    answer.innerText = `Your Birthday is Palindrome`;
+  if (dateInput.value) {
+    if (checkPalindromeAll(date)) {
+      answer.innerText = `Your Birthday is Palindrome`;
+    } else {
+      const { dayCount, nextDate } = getNextPalindrome(date);
+      answer.innerText = `You missed Palindrome by ${dayCount} days and date is ${nextDate.day}-${nextDate.month}-${nextDate.year}`;
+    }
   } else {
-    const { dayCount, nextDate } = getNextPalindrome(date);
-    answer.innerText = `You missed Palindrome by ${dayCount} days and date is ${nextDate.day}-${nextDate.month}-${nextDate.year}`;
+    answer.innerHTML = "Select a date";
   }
   // console.log(getNextPalindrome(dt));
 };
